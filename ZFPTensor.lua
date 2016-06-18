@@ -20,8 +20,8 @@ function ZFPTensor:__init(tensor, accuracy)
       self.accuracy = 1e-15
     end
   else
-    assert(torch.type(accuracy) == 'number' and accuracy < 1 and accuracy > 0,
-           'accuracy must be a number in (0, 1)')
+    assert(torch.type(accuracy) == 'number' and accuracy > 0,
+           'accuracy must be a number > 0')
     self.accuracy = accuracy
   end
   

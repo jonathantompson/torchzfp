@@ -31,6 +31,7 @@ function test.LosslessRand()
       end
       local compressed = torch.ZFPTensor(input, accuracy)
       local decompressed = compressed:decompress()
+      assert(decompressed:isSameSizeAs(input), 'internal error')
       local err = input - decompressed
       mytester:assertlt(err:abs():max(), accuracy, 'Bad decompressed value')
     end
@@ -56,10 +57,9 @@ function test.LossyLena()
     end
     local compressedSize = compressed.data:numel()
     local ratio = compressedSize / inputSize
-
     mytester:assertlt(ratio, 1, 'Could not compress lena!')
-
     local decompressed = compressed:decompress()
+    assert(decompressed:isSameSizeAs(input), 'internal error')
     local err = input - decompressed
     mytester:assertlt(err:abs():max(), accuracy, 'Bad decompressed value')
   end
