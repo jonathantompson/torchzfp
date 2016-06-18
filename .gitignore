@@ -1,0 +1,9 @@
+build
+
+tmp.bin
+*.swp
+image.bin
+image.bin.gz
+image.filtered.zfp
+image.png
+image.zfp
