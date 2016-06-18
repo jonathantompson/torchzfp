@@ -3,7 +3,7 @@ torchzfp
 
 A utility library for zfp compression / decompression of Torch7 float tensors.
 
-It gets significantly better compression ratios than zlib (see https://github.com/jonathantompson/torchzlib for a Torch7 wrapper) for floating point types, particularly tensors that exhibit lots of spatial coherence.
+It (usually) gets better compression ratios than zlib (see https://github.com/jonathantompson/torchzlib for a Torch7 wrapper) for floating point types, particularly tensors that exhibit lots of spatial coherence. The caveat is that usually you need to set the ``accuracy`` value to lossy compression to see any gains.
 
 You can read more about the method here: http://computation.llnl.gov/projects/floating-point-compression (based on the paper "Fixed-Rate Compressed Floating-Point Arrays" by Peter Lindstrom).
 
@@ -24,7 +24,8 @@ require 'torchzfp'
 require 'image'
 
 data = image.lena():double()  -- Can be double or float.
-dataCompressed = torch.ZFPTensor(data)  -- Compress data.
+accuracy = 1e-4
+dataCompressed = torch.ZFPTensor(data, accuracy)  -- Compress data.
 dataDecompressed = dataCompressed:decompress()
 ```
 
